@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://features/interaction/dialogue_prop.gd" id="1_prop"]
 [ext_resource type="Texture2D" path="res://assets/critters/mochi_cat_16x16.png" id="2_sheet"]
 [ext_resource type="Script" path="res://features/interaction/interactable.gd" id="3_interactable"]
-[ext_resource type="Script" path="res://features/world/flag_visibility.gd" id="4_flagvis"]
 
 [sub_resource type="AtlasTexture" id="Atlas_0"]
 atlas = ExtResource("2_sheet")
@@ -49,6 +48,3 @@ prompt_offset = Vector2(0, -20)
 [node name="Shape" type="CollisionShape2D" parent="Interactable"]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_talk")
-
-[node name="FlagVisibility" type="Node" parent="."]
-script = ExtResource("4_flagvis")
