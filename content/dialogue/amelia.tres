@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="DialogueTree" format=3]
+
+[ext_resource type="Script" path="res://features/dialogue/dialogue_node.gd" id="1_s6nq2"]
+[ext_resource type="Script" path="res://features/dialogue/dialogue_choice.gd" id="2_uoxtp"]
+[ext_resource type="Script" path="res://features/dialogue/dialogue_tree.gd" id="3_jg8m8"]
+
+[sub_resource type="Resource" id="Resource_go14d"]
+script = ExtResource("1_s6nq2")
+id = &"start"
+next = &"glad"
+require_flag = &"alex_quest_done"
+fallback = &"check_hint"
+
+[sub_resource type="Resource" id="Resource_hihs2"]
+script = ExtResource("1_s6nq2")
+id = &"check_hint"
+next = &"cat_hint"
+require_flag = &"alex_quest_accepted"
+fallback = &"check_met"
+
+[sub_resource type="Resource" id="Resource_x6sd1"]
+script = ExtResource("1_s6nq2")
+id = &"check_met"
+next = &"again"
+require_flag = &"met_amelia"
+fallback = &"intro"
+
+[sub_resource type="Resource" id="Resource_od2bi"]
+script = ExtResource("1_s6nq2")
+id = &"intro"
+pages = PackedStringArray("哎呀，新面孔！我是 Amelia，在鎮上開花店。", "這個小鎮很安靜，大家都很友善，你一定會喜歡這裡的。")
+set_flag = &"met_amelia"
+
+[sub_resource type="Resource" id="Resource_dmn4l"]
+script = ExtResource("1_s6nq2")
+id = &"again"
+pages = PackedStringArray("今天天氣真好，很適合散步呢。")
+
+[sub_resource type="Resource" id="Resource_lqjvm"]
+script = ExtResource("1_s6nq2")
+id = &"cat_hint"
+pages = PackedStringArray("你在幫 Alex 找麻糬？真是個好人！", "我早上好像看到一隻白貓，往東邊的草地跑過去了。")
+set_flag = &"amelia_gave_cat_hint"
+
+[sub_resource type="Resource" id="Resource_rnmoq"]
+script = ExtResource("1_s6nq2")
+id = &"glad"
+pages = PackedStringArray("聽說麻糬找到了？太好了！Alex 一定很開心。")
+
+[resource]
+script = ExtResource("3_jg8m8")
+nodes = Array[ExtResource("1_s6nq2")]([SubResource("Resource_go14d"), SubResource("Resource_hihs2"), SubResource("Resource_x6sd1"), SubResource("Resource_od2bi"), SubResource("Resource_dmn4l"), SubResource("Resource_lqjvm"), SubResource("Resource_rnmoq")])

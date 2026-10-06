@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://features/world/town.gd" id="1_town"]
 [ext_resource type="TileSet" path="res://assets/tilesets/town_tileset.tres" id="2_tiles"]
 [ext_resource type="PackedScene" path="res://features/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://features/npc/npc.tscn" id="4_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/Interiors_Free_Alex_16x16.png" id="5_alex_sheet"]
+[ext_resource type="Resource" path="res://content/dialogue/alex.tres" id="6_alex_dialogue"]
+[ext_resource type="Texture2D" path="res://assets/characters/Interiors_Free_Amelia_16x16.png" id="7_amelia_sheet"]
+[ext_resource type="Resource" path="res://content/dialogue/amelia.tres" id="8_amelia_dialogue"]
+[ext_resource type="PackedScene" path="res://features/critters/mochi.tscn" id="9_mochi"]
+[ext_resource type="Resource" path="res://content/dialogue/mochi_lost.tres" id="10_mochi_lost"]
+[ext_resource type="Resource" path="res://content/dialogue/mochi_home.tres" id="11_mochi_home"]
 
 [node name="Town" type="Node2D"]
 script = ExtResource("1_town")
@@ -18,3 +26,31 @@ y_sort_enabled = true
 [node name="Player" parent="Entities" instance=ExtResource("3_player")]
 unique_name_in_owner = true
 position = Vector2(320, 192)
+
+[node name="Alex" parent="Entities" instance=ExtResource("4_npc")]
+position = Vector2(368, 176)
+display_name = "Alex"
+sheet = ExtResource("5_alex_sheet")
+dialogue = ExtResource("6_alex_dialogue")
+
+[node name="Amelia" parent="Entities" instance=ExtResource("4_npc")]
+position = Vector2(256, 224)
+display_name = "Amelia"
+sheet = ExtResource("7_amelia_sheet")
+dialogue = ExtResource("8_amelia_dialogue")
+facing = "right"
+
+[node name="MochiLost" parent="Entities" instance=ExtResource("9_mochi")]
+position = Vector2(576, 112)
+dialogue = ExtResource("10_mochi_lost")
+
+[node name="FlagVisibility" parent="Entities/MochiLost" index="2"]
+hide_if = &"mochi_found"
+
+[node name="MochiHome" parent="Entities" instance=ExtResource("9_mochi")]
+position = Vector2(384, 182)
+display_name = "麻糬"
+dialogue = ExtResource("11_mochi_home")
+
+[node name="FlagVisibility" parent="Entities/MochiHome" index="2"]
+show_if = &"alex_quest_done"

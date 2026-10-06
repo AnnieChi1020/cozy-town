@@ -1,0 +1,103 @@
+[gd_resource type="Resource" script_class="DialogueTree" format=3]
+
+[ext_resource type="Script" path="res://features/dialogue/dialogue_node.gd" id="1_kssdb"]
+[ext_resource type="Script" path="res://features/dialogue/dialogue_choice.gd" id="2_7kf07"]
+[ext_resource type="Script" path="res://features/dialogue/dialogue_tree.gd" id="3_lfook"]
+
+[sub_resource type="Resource" id="Resource_xx2cq"]
+script = ExtResource("1_kssdb")
+id = &"start"
+next = &"after_done"
+require_flag = &"alex_quest_done"
+fallback = &"check_found"
+
+[sub_resource type="Resource" id="Resource_dyedt"]
+script = ExtResource("1_kssdb")
+id = &"check_found"
+next = &"reunion"
+require_flag = &"mochi_found"
+fallback = &"check_accepted"
+
+[sub_resource type="Resource" id="Resource_mncvp"]
+script = ExtResource("1_kssdb")
+id = &"check_accepted"
+next = &"waiting"
+require_flag = &"alex_quest_accepted"
+fallback = &"check_declined"
+
+[sub_resource type="Resource" id="Resource_eacg3"]
+script = ExtResource("1_kssdb")
+id = &"check_declined"
+next = &"declined_again"
+require_flag = &"alex_declined"
+fallback = &"intro"
+
+[sub_resource type="Resource" id="Resource_o0qs0"]
+script = ExtResource("2_7kf07")
+text = "我幫你一起找！"
+next = &"accept"
+set_flag = &"alex_quest_accepted"
+
+[sub_resource type="Resource" id="Resource_k26x6"]
+script = ExtResource("2_7kf07")
+text = "抱歉，我現在有點忙。"
+next = &"decline"
+set_flag = &"alex_declined"
+
+[sub_resource type="Resource" id="Resource_qm40k"]
+script = ExtResource("1_kssdb")
+id = &"intro"
+pages = PackedStringArray("啊，你就是新搬來的人吧？我是 Alex，歡迎你！", "其實……我家的貓「麻糬」從早上就不見了。", "牠很怕生，我找遍了家附近都沒看到……")
+choices = Array[ExtResource("2_7kf07")]([SubResource("Resource_o0qs0"), SubResource("Resource_k26x6")])
+
+[sub_resource type="Resource" id="Resource_v4713"]
+script = ExtResource("1_kssdb")
+id = &"accept"
+pages = PackedStringArray("真的嗎？太謝謝你了！", "麻糬是一隻白色的貓，最喜歡曬太陽。", "也許可以問問看 Amelia，她的花店離這裡不遠。")
+
+[sub_resource type="Resource" id="Resource_xg4sq"]
+script = ExtResource("1_kssdb")
+id = &"decline"
+pages = PackedStringArray("沒關係！你剛搬來，一定有很多事要忙。")
+
+[sub_resource type="Resource" id="Resource_rufyr"]
+script = ExtResource("2_7kf07")
+text = "我來幫你找吧。"
+next = &"accept"
+set_flag = &"alex_quest_accepted"
+
+[sub_resource type="Resource" id="Resource_lapri"]
+script = ExtResource("2_7kf07")
+text = "改天吧。"
+next = &"bye"
+
+[sub_resource type="Resource" id="Resource_href7"]
+script = ExtResource("1_kssdb")
+id = &"declined_again"
+pages = PackedStringArray("嗨，又見面了。麻糬還是沒回來……")
+choices = Array[ExtResource("2_7kf07")]([SubResource("Resource_rufyr"), SubResource("Resource_lapri")])
+
+[sub_resource type="Resource" id="Resource_8ufuu"]
+script = ExtResource("1_kssdb")
+id = &"bye"
+pages = PackedStringArray("嗯……好吧，謝謝你關心。")
+
+[sub_resource type="Resource" id="Resource_d4glb"]
+script = ExtResource("1_kssdb")
+id = &"waiting"
+pages = PackedStringArray("麻糬還沒回來……如果你看到牠，一定要告訴我喔。")
+
+[sub_resource type="Resource" id="Resource_6y3gg"]
+script = ExtResource("1_kssdb")
+id = &"reunion"
+pages = PackedStringArray("麻糬！！你找到牠了！", "你這個小壞蛋，跑去哪裡了啦……", "真的、真的很謝謝你。你才剛搬來，就幫了我這麼大的忙。", "以後有什麼需要，儘管來找我！")
+set_flag = &"alex_quest_done"
+
+[sub_resource type="Resource" id="Resource_e07bc"]
+script = ExtResource("1_kssdb")
+id = &"after_done"
+pages = PackedStringArray("麻糬今天很乖，一直待在我旁邊。都是你的功勞！")
+
+[resource]
+script = ExtResource("3_lfook")
+nodes = Array[ExtResource("1_kssdb")]([SubResource("Resource_xx2cq"), SubResource("Resource_dyedt"), SubResource("Resource_mncvp"), SubResource("Resource_eacg3"), SubResource("Resource_qm40k"), SubResource("Resource_v4713"), SubResource("Resource_xg4sq"), SubResource("Resource_href7"), SubResource("Resource_8ufuu"), SubResource("Resource_d4glb"), SubResource("Resource_6y3gg"), SubResource("Resource_e07bc")])

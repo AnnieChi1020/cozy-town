@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="DialogueTree" format=3]
+
+[ext_resource type="Script" path="res://features/dialogue/dialogue_node.gd" id="1_3dkiw"]
+[ext_resource type="Script" path="res://features/dialogue/dialogue_choice.gd" id="2_hne2q"]
+[ext_resource type="Script" path="res://features/dialogue/dialogue_tree.gd" id="3_utur4"]
+
+[sub_resource type="Resource" id="Resource_5dfov"]
+script = ExtResource("1_3dkiw")
+id = &"start"
+next = &"found"
+require_flag = &"alex_quest_accepted"
+fallback = &"idle"
+
+[sub_resource type="Resource" id="Resource_2m6nk"]
+script = ExtResource("1_3dkiw")
+id = &"idle"
+pages = PackedStringArray("一隻白色的貓正在草地上曬太陽。", "牠瞄了你一眼，又懶洋洋地閉上眼睛。")
+
+[sub_resource type="Resource" id="Resource_vkh3l"]
+script = ExtResource("2_hne2q")
+text = "輕輕抱起麻糬"
+next = &"pickup"
+set_flag = &"mochi_found"
+
+[sub_resource type="Resource" id="Resource_ewu3d"]
+script = ExtResource("2_hne2q")
+text = "先不要打擾牠"
+
+[sub_resource type="Resource" id="Resource_5xdba"]
+script = ExtResource("1_3dkiw")
+id = &"found"
+pages = PackedStringArray("白色的毛、圓滾滾的身體……這一定就是麻糬！")
+choices = Array[ExtResource("2_hne2q")]([SubResource("Resource_vkh3l"), SubResource("Resource_ewu3d")])
+
+[sub_resource type="Resource" id="Resource_0ax3e"]
+script = ExtResource("1_3dkiw")
+id = &"pickup"
+pages = PackedStringArray("麻糬「喵～」了一聲，乖乖地讓你抱著。", "快帶牠回去找 Alex 吧！")
+
+[resource]
+script = ExtResource("3_utur4")
+nodes = Array[ExtResource("1_3dkiw")]([SubResource("Resource_5dfov"), SubResource("Resource_2m6nk"), SubResource("Resource_5xdba"), SubResource("Resource_0ax3e")])

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="DialogueTree" format=3]
+
+[ext_resource type="Script" path="res://features/dialogue/dialogue_node.gd" id="1_5rwvo"]
+[ext_resource type="Script" path="res://features/dialogue/dialogue_choice.gd" id="2_cb620"]
+[ext_resource type="Script" path="res://features/dialogue/dialogue_tree.gd" id="3_0ge2h"]
+
+[sub_resource type="Resource" id="Resource_u5qwc"]
+script = ExtResource("1_5rwvo")
+id = &"start"
+pages = PackedStringArray("喵～", "（麻糬滿足地蹭了蹭你的腳）")
+
+[resource]
+script = ExtResource("3_0ge2h")
+nodes = Array[ExtResource("1_5rwvo")]([SubResource("Resource_u5qwc")])

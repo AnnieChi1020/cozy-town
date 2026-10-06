@@ -1,0 +1,54 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://features/interaction/dialogue_prop.gd" id="1_prop"]
+[ext_resource type="Texture2D" path="res://assets/critters/mochi_cat_16x16.png" id="2_sheet"]
+[ext_resource type="Script" path="res://features/interaction/interactable.gd" id="3_interactable"]
+[ext_resource type="Script" path="res://features/world/flag_visibility.gd" id="4_flagvis"]
+
+[sub_resource type="AtlasTexture" id="Atlas_0"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="Atlas_1"]
+atlas = ExtResource("2_sheet")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="Atlas_2"]
+atlas = ExtResource("2_sheet")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="Atlas_3"]
+atlas = ExtResource("2_sheet")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mochi"]
+animations = [{
+"frames": [{"duration": 6.0, "texture": SubResource("Atlas_0")}, {"duration": 1.0, "texture": SubResource("Atlas_2")}, {"duration": 4.0, "texture": SubResource("Atlas_1")}, {"duration": 2.0, "texture": SubResource("Atlas_3")}, {"duration": 3.0, "texture": SubResource("Atlas_0")}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_talk"]
+radius = 10.0
+
+[node name="Mochi" type="Node2D"]
+script = ExtResource("1_prop")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_mochi")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Interactable" type="Area2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_interactable")
+prompt_offset = Vector2(0, -20)
+
+[node name="Shape" type="CollisionShape2D" parent="Interactable"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_talk")
+
+[node name="FlagVisibility" type="Node" parent="."]
+script = ExtResource("4_flagvis")
