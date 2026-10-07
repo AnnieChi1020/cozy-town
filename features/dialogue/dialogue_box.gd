@@ -17,7 +17,6 @@ var _page: int = 0
 var _default_speaker: String = ""
 var _typing: Tween
 
-@onready var _box: Control = %Box
 @onready var _name_label: Label = %NameLabel
 @onready var _text_label: Label = %TextLabel
 @onready var _next_hint: Control = %NextHint
