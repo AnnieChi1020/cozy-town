@@ -32,11 +32,6 @@ window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
-[layer_names]
-
-2d_physics/layer_1="world"
-2d_physics/layer_3="interactable"
-
 [input]
 
 move_left={
@@ -79,6 +74,11 @@ interact={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_3="interactable"
 
 [rendering]
 
